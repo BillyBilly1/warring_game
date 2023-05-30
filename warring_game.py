@@ -1,7 +1,7 @@
 import math
 import datetime
-
 """FDHFSID"""
+#JNTM
 class BuildingMoveError(Exception):
     pass
 
