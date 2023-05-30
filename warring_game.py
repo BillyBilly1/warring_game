@@ -25,6 +25,7 @@ class Player:
 
 
 class CombatUnit:
+    """A class for the types of each box"""
 
     x: int
     y: int
