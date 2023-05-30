@@ -1,7 +1,7 @@
 import math
 import datetime
 
-
+"""FDHFSID"""
 class BuildingMoveError(Exception):
     pass
 
