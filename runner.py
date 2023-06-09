@@ -12,7 +12,10 @@ class Game():
         pygame.display.set_caption('Warring Game')
         self.all_sprites = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
-        Chessboard(self.all_sprites, (GRID_ROW, GRID_COL))
+        self.camera_sprites = CameraGroup()
+        print('1111', self.camera_sprites.sprites())
+        Chessboard(self.camera_sprites, (GRID_ROW, GRID_COL))
+        print('2222', self.camera_sprites.sprites())
 
     def run(self):
         prev_time = time.time()
@@ -27,5 +30,8 @@ class Game():
             self.screen.fill('Cyan')
             self.all_sprites.update(dt)
             self.all_sprites.draw(self.screen)
+            self.camera_sprites.update_offset_keyboard(dt)
+            self.camera_sprites.custom_draw()
+
             pygame.display.update()
             self.clock.tick(50)
