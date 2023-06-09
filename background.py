@@ -41,3 +41,32 @@ class ChessSquare(pygame.sprite.Sprite):
 
     def draw(self, screen: pygame.Surface) -> None:
         screen.blit(self.image, self.rect)
+
+class CameraGroup(pygame.sprite.Group):
+    def __init__(self):
+        super().__init__()
+        self.display_screen = pygame.display.get_surface()
+        self.offset = pygame.math.Vector2()
+        self.keyboard_speed = 200
+    def update_offset_keyboard(self, dt: float):
+        """self.offset changes according to the keyboard up/down/left/right"""
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            print('up is pressed')
+            self.offset.y += self.keyboard_speed * dt
+        if keys[pygame.K_DOWN]:
+            print('down is pressed')
+            self.offset.y -= self.keyboard_speed * dt
+        if keys[pygame.K_RIGHT]:
+            print('right is pressed')
+            self.offset.x -= self.keyboard_speed * dt
+        if keys[pygame.K_LEFT]:
+            print('left is pressed')
+            self.offset.x += self.keyboard_speed * dt
+
+    def custom_draw(self) -> None:
+        """Draw all the sprites in self by a movement against self.offset"""
+        for sprite in self.sprites():
+            # draw sprite on self.display_screen
+            offset_pos = sprite.rect.topleft + self.offset
+            self.display_screen.blit(sprite.image, offset_pos)
