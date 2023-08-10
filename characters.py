@@ -27,8 +27,8 @@ class Player:
 class CombatUnit:
     """A class for the types of each box"""
 
-    x: int
-    y: int
+    x: int  # column index
+    y: int  # row index
     camps: Player
     hp: float
     attack: float
@@ -43,7 +43,7 @@ class CombatUnit:
         self.y = y
         self.camps = camps
 
-    def move(self, x: int, y: int) -> bool:
+    def is_valid_move(self, x: int, y: int) -> bool:
         """Check whether the movement is valid, and the new coordinate"""
         dx = abs(x - self.x)
         dy = abs(x - self.y)
@@ -195,8 +195,9 @@ class DiamondWall(Wall):
 
 
 if __name__ == '__main__':
-    s = Spearman(1, 2, Player())
-    s.move(4, 2)
+    player1 = Player('olivia', 100, 100)
+    s = Spearman(1, 2, player1)
+    s.is_valid_move(4, 2)
     print(s.x)
     print(s.y)
     a = s.be_attacked(9.0)
